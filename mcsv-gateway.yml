@@ -14,12 +14,16 @@ spring:
             - Path=/api/v1/students/**
           filters:
             - StripPrefix=2
+            - AuthFilter
+            
         - id: courses
           uri: lb://mcsv-course
           predicates:
             - Path=/api/v1/courses/**
           filters:
             - StripPrefix=2
+            - AuthFilter
+            
         - id: auth
           uri: lb://microservice-auth
           predicates:
@@ -40,4 +44,5 @@ eureka:
       defaultZone: http://localhost:8761/eureka
     fetch-registry: true
     register-with-eureka: true
+
 
