@@ -3,8 +3,7 @@ server:
 
 spring:
   application:
-    name:
-      mcsv-eureka
+    name: mcsv-eureka
 
 eureka:
   instance:
@@ -14,3 +13,12 @@ eureka:
     fetch-registry: false
     service-url:
       defaultZone: http://microservice-eureka:8761/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
