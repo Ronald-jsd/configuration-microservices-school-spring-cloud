@@ -67,10 +67,10 @@ management:
 resilience4j.ratelimiter:
   instances:
     studentsRateLimiter:
-      limitForPeriod: 10          # máximo 10 peticiones por segundo
+      limitForPeriod: 3          # máximo 10 peticiones por segundo
       limitRefreshPeriod: 1s
       timeoutDuration: 0
     coursesRateLimiter:
-      limitForPeriod: 5           # máximo 5 peticiones por segundo
+      limitForPeriod: 3           # máximo 5 peticiones por segundo
       limitRefreshPeriod: 1s
       timeoutDuration: 0
