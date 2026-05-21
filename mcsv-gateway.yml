@@ -15,6 +15,9 @@ spring:
           filters:
             - StripPrefix=2
             - AuthFilter
+            - name: Resilience4jRateLimiter
+              args:
+                rateLimiter: studentsRateLimiter
             
         - id: courses
           uri: lb://mcsv-course
@@ -23,6 +26,9 @@ spring:
           filters:
             - StripPrefix=2
             - AuthFilter
+            - name: Resilience4jRateLimiter
+              args:
+                rateLimiter: coursesRateLimiter
             
         - id: auth
           uri: lb://microservice-auth
@@ -58,4 +64,13 @@ management:
       application: ${spring.application.name}
 
 
-
+resilience4j.ratelimiter:
+  instances:
+    studentsRateLimiter:
+      limitForPeriod: 10          # máximo 10 peticiones por segundo
+      limitRefreshPeriod: 1s
+      timeoutDuration: 0
+    coursesRateLimiter:
+      limitForPeriod: 5           # máximo 5 peticiones por segundo
+      limitRefreshPeriod: 1s
+      timeoutDuration: 0
