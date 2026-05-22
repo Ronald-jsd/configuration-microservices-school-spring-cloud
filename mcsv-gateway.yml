@@ -11,10 +11,9 @@ spring:
       port: 6379
 
   cloud:
-    config:
-      enabled: false  
     gateway:
-
+      loadbalancer:
+        use404: true
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Origin
 
