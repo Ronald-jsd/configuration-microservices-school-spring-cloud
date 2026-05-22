@@ -12,6 +12,10 @@ spring:
 
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true      
       loadbalancer:
         use404: true
       default-filters:
@@ -55,7 +59,7 @@ spring:
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG
-    reactor.netty: DEBUG
+    reactor.netty: INFO
     org.springframework.web: DEBUG
     com.netflix.discovery: DEBUG
 
