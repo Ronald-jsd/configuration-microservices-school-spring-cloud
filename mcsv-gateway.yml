@@ -29,7 +29,7 @@ spring:
             - Path=/api/v1/students/**
           filters:
             - StripPrefix=2
-            - AuthFilter
+            - Auth
             - name: RequestRateLimiter
               args:
                 redis-rate-limiter.replenishRate: 3
@@ -42,7 +42,7 @@ spring:
             - Path=/api/v1/courses/**
           filters:
             - StripPrefix=2
-            - AuthFilter
+            - Auth
             - name: RequestRateLimiter
               args:
                 redis-rate-limiter.replenishRate: 3
