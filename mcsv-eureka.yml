@@ -10,7 +10,7 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
     service-url:
-      defaultZone: http://mcsv-eureka:8761/eureka/
+      defaultZone: http://microservice-eureka:8761/eureka/
 
   instance:
     prefer-ip-address: true
