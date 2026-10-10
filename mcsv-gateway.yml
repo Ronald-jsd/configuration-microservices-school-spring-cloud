@@ -77,11 +77,14 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics,prometheus
+        include: health,info,metrics,prometheus,gateway
 
   endpoint:
     health:
       show-details: always
+    gateway:
+      enabled: true
+      access: unrestricted
 
   metrics:
     tags:
