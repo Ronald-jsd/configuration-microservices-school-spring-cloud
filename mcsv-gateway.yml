@@ -78,7 +78,7 @@ management:
     web:
       base-path: /courses/actuator
       exposure:
-        include: health,info,metrics,prometheus
+        include: health,info,circuitbreakers,circuitbreakerevents,metrics,prometheus
 
   endpoint:
     health:
