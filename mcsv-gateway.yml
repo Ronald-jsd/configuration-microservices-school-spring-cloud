@@ -76,9 +76,8 @@ eureka:
 management:
   endpoints:
     web:
-      base-path: /courses/actuator
       exposure:
-        include: health,info,circuitbreakers,circuitbreakerevents,metrics,prometheus
+        include: health,info,metrics,prometheus
 
   endpoint:
     health:
