@@ -75,6 +75,7 @@ resilience4j:
 management:
   endpoints:
     web:
+      base-path: /courses/actuator
       exposure:
         include: health,info,circuitbreakers,circuitbreakerevents,metrics,prometheus
   endpoint:
