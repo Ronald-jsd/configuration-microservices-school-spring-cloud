@@ -4,12 +4,13 @@ server:
 spring:
   application:
     name: mcsv-course
+
   datasource:
     driver-class-name: org.postgresql.Driver
-    url:  ${SPRING_DATASOURCE_URL}
+    url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
-    
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -19,13 +20,13 @@ spring:
     properties:
       hibernate:
         format_sql: true
-    
+
   sql:
     init:
       mode: always
       schema-locations: classpath:/schema.sql
       data-locations: classpath:/data.sql
-      
+
   cloud:
     loadbalancer:
       ribbon:
@@ -51,26 +52,32 @@ resilience4j:
     instances:
       students-service:
         register-health-indicator: true
+        sliding-window-type: COUNT_BASED
         sliding-window-size: 10
+        minimum-number-of-calls: 5
         failure-rate-threshold: 50
-        wait-duration-in-open-state: 30s
+        wait-duration-in-open-state: 15s
         permitted-number-of-calls-in-half-open-state: 3
         automatic-transition-from-open-to-half-open-enabled: true
         slow-call-rate-threshold: 50
-        slow-call-duration-threshold: 5s
+        slow-call-duration-threshold: 3s
+
   retry:
     instances:
       students-service-retry:
         max-attempts: 3
         wait-duration: 1s
         retry-exceptions:
-          - org.springframework.dao.DataAccessException
-          - java.io.IOException
           - feign.RetryableException
+          - java.io.IOException
+        ignore-exceptions:
+          - jakarta.persistence.EntityNotFoundException
+
   timelimiter:
     instances:
       students-service-timelimiter:
         timeout-duration: 4s
+        cancel-running-future: true
 
 management:
   endpoints:
@@ -78,14 +85,15 @@ management:
       base-path: /courses/actuator
       exposure:
         include: health,info,circuitbreakers,circuitbreakerevents,metrics,prometheus
+
   endpoint:
     health:
       show-details: always
+
   health:
     circuitbreakers:
       enabled: true
+
   metrics:
     tags:
       application: ${spring.application.name}
-
-
